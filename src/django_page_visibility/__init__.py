@@ -13,7 +13,8 @@ def get_exceptions():
         import_string(e) if isinstance(e, str) else e
         for e in getattr(settings, 'PAGE_VISIBILITY_EXCEPTIONS', (PermissionDenied, Http404))
     ]
-EXCEPTIONS = list(get_exceptions())
+# Note - except clauses only take tuples of exceptions, not lists
+EXCEPTIONS = tuple(get_exceptions())
 
 class PageVisibilityError(Exception):
     '''
