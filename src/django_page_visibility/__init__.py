@@ -5,6 +5,7 @@ from django.test.client import RequestFactory
 from django.urls import resolve
 from django.urls.exceptions import Resolver404
 from django.utils.module_loading import import_string
+from urllib.parse import urljoin
 
 factory = RequestFactory()
 
@@ -65,4 +66,8 @@ def is_visible(path, request, *args, **kwargs):
     '''
         Convenience wrapper around is_visible_to_user, which will cover most use cases
     '''
+
+    # Resolve path relative to current request - allows you to pass in relative paths
+    path = urljoin(request.get_full_path(), path)
+
     return is_visible_to_user(path, request.user, *args, **kwargs)
