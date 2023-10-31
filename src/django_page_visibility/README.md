@@ -1,3 +1,5 @@
+DEPRECATED. This approach causes more headaches than it's worth.
+
 # django_page_visibility
 
 This package implements a standard protocol allowing developers to ask "can user X currently access page Y?". 
